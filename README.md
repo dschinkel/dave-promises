@@ -6,7 +6,7 @@ This library was test driven (TDD).
 ## Installation
 #### Run
 
-1. clone https://github.com/dschinkel/dave-promises.git
+1. git clone https://github.com/dschinkel/dave-promises.git
 2. npm install
 
 ## Testing
