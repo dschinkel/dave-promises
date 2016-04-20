@@ -1,8 +1,7 @@
 'use strict';
 
 let chai = require('chai'),
-    expect = chai.expect(),
-    promise = require('../../src/promise');
+    expect = chai.expect();
 
 describe('Promise', () => {
 
