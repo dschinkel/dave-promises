@@ -1,5 +1,5 @@
 # Dave's Promises
-A Promise Library I created in order to to get to know es6 promises
+A Promise Library I created in order to get to know es6 promises
 
 This library was test driven (TDD).
 

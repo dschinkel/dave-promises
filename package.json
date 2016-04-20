@@ -8,7 +8,7 @@
   "author": "",
   "private": false,
   "license": "MIT",
-  "description": "A Promise Library I created in order to to get to know es6 promises",
+  "description": "A Promise Library I created in order to get to know es6 promises",
   "engines": {
     "node": ">= 4.0",
     "npm": ">= 2.14"
