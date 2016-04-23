@@ -6,7 +6,7 @@ let chai = require('chai'),
 describe('Promise', () => {
 
     it('should callback when resolve is invoked', () => {
-        new DavePromise(resolve => {
+        const DavePromise = new Promise(resolve => {
             resolve('hi!');
             }).then(value => {
                 expect(value).to.equal('hi!');
