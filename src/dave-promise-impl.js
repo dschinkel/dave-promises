@@ -1,5 +1,5 @@
 
 
-//function DavePromise(promise){
+//function DavePromiseImpl(promise){
 //
 //}
