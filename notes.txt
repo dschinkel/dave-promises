@@ -1,0 +1,3 @@
+
+https://www.twilio.com/blog/2015/10/asyncawait-the-hero-javascript-deserved.html
+    Writing asynchronous code is hard. When it comes to JavaScript we rely heavily on callback functions to accomplish asynchronous tasks which can be unintuitive.
