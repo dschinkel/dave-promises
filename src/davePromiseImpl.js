@@ -6,6 +6,7 @@ var resolved = false;
 
 var Impl = function(callback){
 
+
     callback(function(resolvedValue){
         result = resolvedValue;
     });
@@ -21,4 +22,4 @@ Impl.prototype.then = function(handler){
     }
 }
 
-export default impl;
+export default Impl;

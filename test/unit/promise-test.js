@@ -1,6 +1,7 @@
 import Impl from '../../src/davePromiseImpl'
 import {expect} from 'chai';
 
+// using a const so we can swap out diff promise implementations
 const DavePromise = Impl;
 
 describe('Promise', () => {
