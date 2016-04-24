@@ -1,11 +1,10 @@
 
 var result;
-var counter = 0;
 
 var Impl = function(callback){
 
-    callback(function(resolvedValue){
-        result = resolvedValue;
+    callback(function(value){
+        result = value;
     });
 
 };
