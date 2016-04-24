@@ -4,7 +4,7 @@
 var result;
 var resolved = false;
 
-var impl = function(callback){
+var Impl = function(callback){
 
     callback(function(resolvedValue){
         result = resolvedValue;
@@ -15,7 +15,7 @@ var impl = function(callback){
     }
 };
 
-impl.prototype.then = function(handler){
+Impl.prototype.then = function(handler){
     if(resolved){
         return handler(result);
     }

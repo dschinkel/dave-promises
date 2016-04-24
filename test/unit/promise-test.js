@@ -1,7 +1,7 @@
-import DavePromiseImpl from '../../src/davePromiseImpl'
+import Impl from '../../src/davePromiseImpl'
 import {expect} from 'chai';
 
-const DavePromise = DavePromiseImpl;
+const DavePromise = Impl;
 
 describe('Promise', () => {
 
