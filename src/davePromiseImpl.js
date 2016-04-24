@@ -1,15 +1,9 @@
 
 
-export default function(resolveCallback){
+export default function(callback){
     //function(resolve) { resolve('hi') }
-    var resolveFunction = (value) => {return value};
+    var resolveIt = (value) => {return value};
 
-    return resolveCallback((resolveFunction));
+    return callback((resolveIt));
 };
 
-
-//export default function(function(resolve) { resolve('hi') }){
-//    //function(resolve) { resolve('hi') }
-//
-//    var value =
-//};
