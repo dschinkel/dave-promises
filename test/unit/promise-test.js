@@ -1,4 +1,3 @@
-//import Impl from './davePromiseImpl'
 import Impl from '../../src/davePromiseImpl'
 import {expect} from 'chai';
 

@@ -2,7 +2,6 @@
 require('babel-core/register');
 
 var gulp = require('gulp'),
-    runSequence = require('run-sequence'),
     mocha = require('gulp-mocha'),
     sourcemaps = require('gulp-sourcemaps'),
     babel = require('gulp-babel'),
