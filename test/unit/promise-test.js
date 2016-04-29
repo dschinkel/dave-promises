@@ -4,7 +4,7 @@ import {expect} from 'chai';
 const DavePromise = Impl;
 
 describe('Promise', () => {
-    it('should callback when resolve is invoked', () => {
+    it.skip('should callback when resolve is invoked', () => {
         new DavePromise(resolve => {
             resolve('hi!');
         }).then(value => {

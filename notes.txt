@@ -79,3 +79,5 @@ export default callback => {
         }
     };
 };
+
+https://github.com/esnext/es6-module-transpiler/issues/85 (on exports.default that Dave is using)

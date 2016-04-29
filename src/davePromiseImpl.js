@@ -1,30 +1,37 @@
-var resolved;
 
-var Impl = function(executor){
+function Impl(executor){
+    var queue = [],
+        result;
 
     executor(function(value){
-        resolved = value;
+        result = value;
+        for(let callback of queue){
+            callback(result);
+        };
     });
+
+    return {
+        then(handle){
+            if(result){
+                handle(result);
+            }
+            else {
+                queue.push(handle);
+            }
+        }
+    }
 
 };
 
-Impl.prototype.then = function(fulfilledHandler){
-    var queue = [];
-
-    if(resolved && queue.length > 0){
-        for(let callback of queue){
-            callback(resolved);
-        };
-    }
-    else {
-        queue.push(fulfilledHandler);
-    }
-
-}
 
 export default Impl;
 
-
+/*
+     Questions
+     - dave didn't check for queue length
+     - exports.default vs. export default.
+     - why doesn't return function then() work?  but { then() does?
+  */
 
 //function DavePromise(callback) {
 //    var subs = [];
