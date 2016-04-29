@@ -19,7 +19,6 @@ function Impl(executor){
             }
         }
     }
-
 };
 
 export default Impl;

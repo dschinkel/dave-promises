@@ -36,7 +36,7 @@ gulp.task('test', function() {
     process.env.PORT = 8000;
     return gulp.src(['test/unit/*-test.js'], { read: false })
         .pipe(mocha({
-            timeout: 3000,
+            timeout: 10000,
             reporter: config.test.mocha.reporter,
             ui: 'bdd'
         }))
