@@ -14,7 +14,7 @@ describe('Promise', () => {
 
     it('should callback when resolved at a later time', done => {
         new DavePromise(resolve => {
-            setTimeout(() => resolve('hi!'), 2500);
+            setTimeout(() => resolve('hi!'), 2800);
         }).then(value => {
             expect(value).to.equal('hi!');
             done();
