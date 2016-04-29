@@ -3,8 +3,7 @@ function Impl(executor){
     var queue = [],
         result;
 
-    executor(function(value){
-        result = value;
+    executor((result) => {
         for(let callback of queue){
             callback(result);
         };
