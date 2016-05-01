@@ -1,10 +1,14 @@
 
 
+resolve => {
+    resolve('hi!');
+};
+
 function Impl(resolve){
     var queue = [],
         result;
 
-    resolve(result => {
+    resolve((result) => {
         for(let callback of queue){
             callback(result);
         };
