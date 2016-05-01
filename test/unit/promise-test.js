@@ -13,13 +13,13 @@ describe('Promise', () => {
         })
     });
 
-    //it('should callback when resolved at a later time', done => {
-    //    new DavePromise(resolve => {
-    //        setTimeout(() => resolve('hi!'), 500);
-    //    }).then(value => {
-    //        expect(value).to.equal('hi!');
-    //        done();
-    //    });
-    //});
+    it('should callback when resolved at a later time', done => {
+        new DavePromise(resolve => {
+            setTimeout(() => resolve('hi!'), 1500);
+        }).then(value => {
+            expect(value).to.equal('hi!');
+            done();
+        });
+    });
 
 });
