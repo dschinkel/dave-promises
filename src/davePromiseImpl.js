@@ -3,19 +3,31 @@
 function Impl(callback) {
     var queue = [],
         result,
-        reject;
+        rejectError;
 
     var resolve = function(value){
         result = value;
-        for(let callback of queue){
-            if(result){
-                callback(result, null);
-            }
-        };
+        processQueue();
     };
 
     var reject = function(error){
-        reject = error;
+        rejectError = error;
+        processQueue();
+
+    }
+
+    function processQueue(){
+
+        for(let callback of queue){
+
+            if(result){
+                callback(result, null);
+            }
+
+            if(rejectError){
+                callback(null, rejectError);
+            }
+        };
     }
 
     callback(resolve, reject);
