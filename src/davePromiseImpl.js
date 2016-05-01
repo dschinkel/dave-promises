@@ -5,17 +5,17 @@ function Impl(callback) {
         result,
         rejectError;
 
-    var resolve = function(value){
+    var resolve = value =>{
         result = value;
         processQueue();
     };
 
-    var reject = function(error){
+    var reject = error => {
         rejectError = error;
         processQueue();
     }
 
-    function processQueue(){
+    var processQueue = () => {
 
         for(let callback of queue){
 
