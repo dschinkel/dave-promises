@@ -13,7 +13,6 @@ function Impl(callback) {
     var reject = function(error){
         rejectError = error;
         processQueue();
-
     }
 
     function processQueue(){
