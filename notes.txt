@@ -81,3 +81,5 @@ export default callback => {
 };
 
 https://github.com/esnext/es6-module-transpiler/issues/85 (on exports.default that Dave is using)
+
+- if you run tests and they stall in webstorm's runner, check the debug tab, there might be an error that doesn't necessary print out in the console next to the test runner

@@ -2,23 +2,30 @@
 
 function Impl(callback) {
     var queue = [],
-        result;
+        result,
+        reject;
 
     var resolve = function(value){
         result = value;
         for(let callback of queue){
-            callback(result);
+            if(result){
+                callback(result, null);
+            }
         };
+    };
+
+    var reject = function(error){
+        reject = error;
     }
 
-    callback(resolve);
+    callback(resolve, reject);
 
     return {
         then(handle){
             if(result){
                 handle(result);
             }
-            else {
+            else{
                 queue.push(handle);
             }
         }
