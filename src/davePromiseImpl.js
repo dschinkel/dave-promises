@@ -1,14 +1,17 @@
 
 
-function Impl(resolve){
+function Impl(callback) {
     var queue = [],
         result;
 
-    resolve(result => {
+    var resolve = function(value){
+        result = value;
         for(let callback of queue){
             callback(result);
         };
-    });
+    }
+
+    callback(resolve);
 
     return {
         then(handle){
