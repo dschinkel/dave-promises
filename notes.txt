@@ -83,3 +83,132 @@ export default callback => {
 https://github.com/esnext/es6-module-transpiler/issues/85 (on exports.default that Dave is using)
 
 - if you run tests and they stall in webstorm's runner, check the debug tab, there might be an error that doesn't necessary print out in the console next to the test runner
+
+
+Promises
+=========
+    http://www.datchley.name/es6-promises/
+
+    Words that mean the same thing (AKA) in the context of a promise
+    ----------------------------------------------------------------
+    handler => callback handler => callback - all these refer to the callback function specified in your then()
+
+    "Do something" => Perform an operation => - the promise will eventually call your then callback which does something (the implementation of the callback does something)
+
+    fulfillment - first var in your then().  When called, it'll run your fulfillment handler function that you specify and is passed the resolve value received from the
+
+    General
+    --------
+
+    - A promise is a promise to do "something / operation(s)" later
+        - that "something / operations(s)" means the promise will at some time in the fugure call your then() fulfillment or reject callbacks (hanlders) that have been queued up
+        - A promise is just a promise to call a function back if something changes so that it can continue executing
+
+    - a promise is a contract between functions meaning at some point in time if I have data, I will call you, because now, any number of functions who care about the contract
+      about the promise can all simply add their callback to the queue and then respond whenever it matures (i.e.: is resolved)
+
+    - They represent a value that we can handle at some point in the future
+
+    - is a stand-in for a future value
+
+    - th "consume" a promise means to process the promise value once fulfilled
+        - the way in which we "process" the promese is via a handler (a functino) we pass to a promise's then() method
+            - This function you pass to the then() will receive the resolved value of the Promise once it is fulfilled
+
+    - more than just allowing us to handle future values, they give us a much better way to control asynchronous program flow than plain callbacks
+        - Plain callbacks don't really let us use our usual language features like return and throw to handle value and error processing in synchronous flows
+
+    - it’s possible it may never resolve
+
+    - Promises give us guarantees about that future value, specifically:
+
+        - No other registered handlers of that value can change it (the Promise is immutable)
+        - We are guaranteed to receive the value, regardless of when we register a handler for it, even if it's already resolved (in contrast to events, which can incur race conditions).
+
+    - it's a subscriber model.  Any number of objects or code can subscribe to it and then specify the fulfillment implementation for then() once the promise resolves
+
+    - a promise is great is because many consuming objects can all wait for an answer, and you can move on with your life
+
+    - you give a promise two pieces of info:
+        resolve: info the promise needs to pass to the callback for fulfillment
+        reject: error info the promise needs to pass to the cacllback for rejection
+                - Throwing an exception in a Promise will automatically reject that Promise as well
+                    - This is the same for .then() handlers and their results and return values as well - a thrown error is wrapped in a Promise and treated as a rejection
+
+    - Once we have a Promise, it can be passed around as a value
+        - The Promise is a stand-in for a future value; and so it can be returned from a function, passed as a parameter and used in any other way a standard value would be used
+
+    - When a promise is created, it immediately runs the then()
+
+    - the then is like filling a mailbox with requests
+        - so the callback queue is a bunch of functions that want to be notified when a result is determined.  They don’t block.  They yield to other flows of execution
+        - in the promise, the “then” function in the tests is called immediately
+        - if you look at the impl, it return an object with a then function
+        - also a callback is a function that may or may not be called
+            - in other words, I can pass you a function and you may or may not call me back with some data.  Or you could not call it at all
+              for example for function someFunc(callback) {}, I could call someFunc(()=> {}); all day, all night or I could call callback at any time I wish,
+              like in 3 hours or whenever.  Or I could call callback in response to some other event.  setTimeout(callback(‘Hi’), 23432421423432421432143124);
+                - it’s not really a question of why, but whether you can do it; you can totally do it
+                - a promise just standardizes this pattern so that you can set a callback on a contract and you know if your callback is called, that contract has matured
+                  and you’ll get your answer
+
+    - when creating a promise, we send it a handler.  This handler has two params:
+        - resolve - is a function to call with the future value when it's ready
+            - You can also create an immediately resolved Promise by using the Promise.resolve() method
+        - reject - a function to call to reject the Promise if it can't resolve the future value
+
+
+    - then()
+        - Takes 2 params:
+            - The first is the function to be called when the Promise is fulfilled
+            - second is a function to be called if the Promise is rejected
+
+                p.then((val) => console.log("fulfilled:", val),
+                       (err) => console.log("rejected: ", err));
+        - You can omit either handler in a .then(), so sending a null as the first handler and providing the second is the same as the standard Promise.catch()
+          which takes a single handler to be called when a promise is rejected
+            - You should use .catch() for handling errors, rather than .then(null, fn)
+                - because using .catch() is more explicit and idiomatic; and when chaining you can have a single .catch() at the end of the chain to handle any
+                  rejection or thrown exceptions from either the original promise or any of it's handlers
+        - Throwing an exception in a Promise will automatically reject that Promise as well
+            - This is the same for .then() handlers and their results and return values as well - a thrown error is wrapped in a Promise and treated as a rejection
+        - Promise.catch() - takes a single handler to be called when a promise is rejected
+
+
+            The following are equivalent:
+
+            p.then((val) => console.log("fulfilled:", val))
+             .catch((err) => console.log("rejected:", err));
+
+            p.then((val) => console.log("fulfilled:", val))
+             .then(null, (err) => console.log("rejected:", err));
+
+        is this flow is correct?
+            matures => resolved (the promise called your resolve code)
+            resolved => now I can fulfill it (or aka call the then(fulfill)
+            fulfill it = > handle the return value (do something with it in your then(fulfill) handler)(edited)
+        d: return value is vague
+           you could mean what’s returned by calling new Promise(), or what’s returned to the callback?
+        me: value in this sense is the value the promise got back when it called your resolve function implementation.  That value is then passed to the then() to be fulfilled(edited)
+        d: you mean the resolve function?
+        me: yea
+        d:  yes
+
+           that’s correct
+
+           it’s not passed to the then
+
+           the then is long gone
+
+           then is called immediately to register a callback
+
+           it’s passed to the callbacks themselves
+
+    Async
+    -----
+    - in any application, there are always tons of flows that aren’t executed until some event takes place (user action, programmatic event, etc.)
+    - means we go on with execution and at some point later someone will notify us to continue our work
+        - in synchronous programming, you would have the thread wait until an event occurs (typically IO, etc.)
+          and then continue execution in the thread which can be wasteful as you have a thread essentially consuming resources needlessly
+
+
