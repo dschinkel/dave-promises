@@ -1,42 +1,42 @@
 
 
 function Impl(callback) {
-    var queue = [],
-        result,
-        rejectError;
+    var callbackQueue = [],
+        resolved,
+        rejected;
 
     var resolve = value =>{
-        result = value;
+        resolved = value;
         processCAllbackQueue();
     };
 
     var reject = error => {
-        rejectError = error;
-        processCAllbackQueue();
+        rejected = error;
+        //processCAllbackQueue();
     }
 
     var processCAllbackQueue = () => {
-        for(let callback of queue){
-
-            if(result){
-                callback(result, null);
-            }
-
-            if(rejectError){
-                callback(null, rejectError);
-            }
-        };
+        if(resolved != undefined && resolved){
+            for(let callback of callbackQueue){
+                callback(resolved, undefined);
+            };
+        }else if(resolved === undefined || !resolved && rejected != undefined && rejcted){
+            callback(undefined, rejected);
+        }
     }
 
     callback(resolve, reject);
 
     return {
         then(handle){
-            if(result){
-                handle(result);
+            if(resolved != undefined && resolved){
+               // handle(resolved, undefined);
+            }
+            else if(rejected != undefined && rejected ){
+                handle(null, rejected);
             }
             else{
-                queue.push(handle);
+                callbackQueue.push(handle);
             }
         }
     }

@@ -30,8 +30,8 @@ Notes:
     For some reason, I'm not able to get mocha debug to hit my original files using sourcemaps, the debug works but it's hitting my transpiled code.
 
     I got debug working on build and remember that I had to change in my test, referencing the Imp using import Impl from './davePromiseImpl' since I was
-    setting up my debug to work over my build folder so I was debugging on my test.js file from my debug folder so it had to be relative to my build folder and also had to
-    change the guilpfile mocha src to the build folder: return gulp.src(['build/*-test.js'], { read: false })
+    setting up my debug to work over my build folder so I was debugging on my runJS.js file from my debug folder so it had to be relative to my build folder and also had to
+    change the guilpfile mocha src to the build folder: return gulp.src(['build/*-runJS.js'], { read: false })
 
 https://github.com/stefanwalther/es6-debug-webstorm - nice github page on how this guy does it
 
@@ -101,7 +101,7 @@ Promises
     --------
 
     - A promise is a promise to do "something / operation(s)" later
-        - that "something / operations(s)" means the promise will at some time in the fugure call your then() fulfillment or reject callbacks (hanlders) that have been queued up
+        - that "something / operations(s)" means the promise will at some time in the future call your then() fulfillment or reject callbacks (handlers) that have been queued up
         - A promise is just a promise to call a function back if something changes so that it can continue executing
 
     - a promise is a contract between functions meaning at some point in time if I have data, I will call you, because now, any number of functions who care about the contract
@@ -111,7 +111,7 @@ Promises
 
     - is a stand-in for a future value
 
-    - th "consume" a promise means to process the promise value once fulfilled
+    - to "consume" a promise means to process the promise value once fulfilled
         - the way in which we "process" the promese is via a handler (a functino) we pass to a promise's then() method
             - This function you pass to the then() will receive the resolved value of the Promise once it is fulfilled
 
@@ -140,7 +140,7 @@ Promises
 
     - When a promise is created, it immediately runs the then()
 
-    - the then is like filling a mailbox with requests
+    - the then() is like filling a mailbox with requests
         - so the callback queue is a bunch of functions that want to be notified when a result is determined.  They don’t block.  They yield to other flows of execution
         - in the promise, the “then” function in the tests is called immediately
         - if you look at the impl, it return an object with a then function
@@ -211,4 +211,18 @@ Promises
         - in synchronous programming, you would have the thread wait until an event occurs (typically IO, etc.)
           and then continue execution in the thread which can be wasteful as you have a thread essentially consuming resources needlessly
 
+    ?
+    --
+    - do you always need to add done() to mocha tests?
+    - if the code is async for the promises why are the tests waiting for the long running functions?
+        - I think they aren't.  I think because there is no more syncronous code for example after the setTimeout, that it's just waiting for then to be called because the long running code hasn't been pushed to the event queu
+          so it appears as if it's syncronous but I bet if you put more code in after the promise it would run
+    - so you call to reject the Promise if it can't resolve the future value.  What represents or defines "can't resolve"?  is it if we get an undefined, null, or something else back from calling back the resolve?
+    - should I initialize all my variables?  If so with what, nulls?  If not then why don't I need to?
+    - see the vid I created on youtube relating to this: ask jetbrains why mocha tests hang instead of showing you a timeout error when your test hangs because it never receives back a resolved value from a long running function for example whereas if
+      run the same tests from the command-line, it fails by showing that you've exceeded the mocha timeout.  Why doesn't webstorm show you the timeout error for mocha also and just hangs instead?
 
+    JS
+    ---
+
+        http://stackoverflow.com/questions/9828684/how-to-get-all-arguments-of-a-callback-function
