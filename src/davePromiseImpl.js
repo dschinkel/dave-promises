@@ -20,7 +20,7 @@ function Impl(callback) {
             for(let callback of callbackQueue){
                 callback(resolved, undefined);
             };
-        }else if(resolved === undefined || !resolved && rejected != undefined && rejcted){
+        }else if(resolved === undefined || !resolved && rejected != undefined && rejected){
             callback(undefined, rejected);
         }
     }
