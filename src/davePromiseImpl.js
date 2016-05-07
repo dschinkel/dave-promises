@@ -30,6 +30,7 @@ function Impl(callback) {
 
     return {
         then(handle){
+            console.log("hanlde: " + handle);
             if(resolved != undefined && resolved){
                 console.log("calling handle resolved");
                 handle(resolved, undefined);
