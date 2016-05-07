@@ -20,7 +20,7 @@ function Impl(callback) {
     var processCAllbackQueue = () => {
         if(resolved != undefined && resolved) {
             for (let callback of callbackQueue) {
-                console.log("calling this callback from the callback queue:" + callback);
+                console.log("about to process this callback from the queue: " + callback);
                 console.log("resolved1: " + resolved);
                 console.log("rejected1: " + rejected);
                 callback(resolved);
@@ -32,15 +32,16 @@ function Impl(callback) {
 
     return {
         then(handle){
-            console.log("handel: " + handle);
+            console.log("handle: " + handle);
             if(resolved != undefined && resolved){
-                console.log("calling handle resolved");
+                console.log("calling handle for resolved: " + handle);
                 handle(resolved, undefined);
             }
             else if(rejected != undefined && rejected){
                 console.log("calling handle rejected");
                 console.log("resolved2: " + resolved);
                 console.log("rejected2: " + rejected);
+                //console.log("handle: " + handle);
                 handle(undefined, rejected);
             }
             else{
@@ -48,6 +49,7 @@ function Impl(callback) {
             }
         }
     }
+
 };
 
 export default Impl;
