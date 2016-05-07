@@ -7,33 +7,36 @@ function Impl(callback) {
 
     var resolve = value =>{
         resolved = value;
+        console.log("resolved value after callback: " + resolved);
+        console.log("about to process callback queue");
         processCAllbackQueue();
     };
 
     var reject = error => {
         rejected = error;
-        //processCAllbackQueue();
+        console.log("rejected value after callback: " + rejected);
     }
 
     var processCAllbackQueue = () => {
-        if(resolved != undefined && resolved){
-            for(let callback of callbackQueue){
-                callback(resolved, undefined);
+        if(resolved != undefined && resolved) {
+            for (let callback of callbackQueue) {
+                console.log("calling this callback from the callback queue:" + callback);
+                callback(resolved);
             };
-        }else if(resolved === undefined || !resolved && rejected != undefined && rejected){
-            callback(undefined, rejected);
-        }
-    }
+        };
+    };
 
     callback(resolve, reject);
 
     return {
         then(handle){
             if(resolved != undefined && resolved){
-               // handle(resolved, undefined);
+                console.log("calling handle resolved");
+                handle(resolved, undefined);
             }
-            else if(rejected != undefined && rejected ){
-                handle(null, rejected);
+            else if(rejected != undefined && rejected){
+                console.log("calling handle rejected");
+                handle(undefined, rejected);
             }
             else{
                 callbackQueue.push(handle);
