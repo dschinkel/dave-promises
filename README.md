@@ -1,8 +1,6 @@
 # Dave's Promises
 I TDD my own Promise Library to learn how promises work.
 
-This library was test driven (TDD).
-
 ## Installation
 #### Run
 
