@@ -33,9 +33,10 @@ function Impl(callback) {
     return {
 
         then(handleResolved, handleRejected){
-
+            var newValue;
             if (resolved != undefined && handleResolved) {
-                handleResolved(resolved, undefined);
+                newValue = handleResolved(resolved, undefined);
+                console.log("newValue: " + newValue);
             }
             else if (rejected != undefined && rejected) {
                 handleRejected(rejected);
@@ -43,8 +44,11 @@ function Impl(callback) {
             else {
                 callbackQueue.push(handleResolved);
             }
+            var newPromise = new Impl(resolve =>{
+                resolve(newValue);
+            })
 
-            return this;
+            return newPromise;
         }
     }
 };
