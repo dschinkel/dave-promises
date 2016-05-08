@@ -22,7 +22,6 @@ function Impl(callback) {
         };
     };
 
-
     try {
         callback(resolve, reject);
     } catch (err) {
