@@ -33,6 +33,7 @@ function Impl(callback) {
     return {
 
         then(handleResolved, handleRejected){
+
             if (resolved != undefined && handleResolved) {
                 handleResolved(resolved, undefined);
             }
@@ -43,10 +44,8 @@ function Impl(callback) {
                 callbackQueue.push(handleResolved);
             }
 
-            return currentPromise;
+            return this;
         }
-
-
     }
 };
 
