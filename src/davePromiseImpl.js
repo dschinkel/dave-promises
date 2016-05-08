@@ -26,18 +26,36 @@ function Impl(callback) {
 
     return {
         then(handleResolved, handleRejected){
-            if(resolved != undefined && handleResolved){
+            if (resolved != undefined && handleResolved) {
                 handleResolved(resolved, undefined);
             }
-            else if(rejected != undefined && rejected){
+            else if (rejected != undefined && rejected) {
                 handleRejected(rejected);
             }
-            else{
+            else {
                 callbackQueue.push(handleResolved);
             }
         }
     }
-
 };
+// I just implemented this all function to make my test pass...
+Impl.all = function(promises){
+
+    var values = [];
+
+    for (let promise of promises){
+        promise.then(value =>{
+            values.push(value);
+        });
+    }
+
+    return {
+        then(handleResolved){
+            if (values != undefined && values) {
+                handleResolved(values, undefined);
+            }
+        }
+    }
+}
 
 export default Impl;

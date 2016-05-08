@@ -35,4 +35,13 @@ describe('Promise', () => {
         });
     });
 
+    it('should have an all that handles multiple promises', done => {
+        var sum = 0;
+        var promises = [new DavePromise(resolve => sum += 2), new DavePromise(resolve => sum += 3)];
+
+        DavePromise.all(promises).then(() => {
+            expect(sum).to.equal(5);
+            done();
+        });
+    });
 });
