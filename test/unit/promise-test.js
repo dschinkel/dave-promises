@@ -62,10 +62,8 @@ describe('Promise', () => {
         new DavePromise((resolve) =>{
             resolve('T');
         }).then(value =>{
-            console.log("value1: " + value);
             return value + "D";
         }).then(value => {
-            console.log("value2: " + value);
             return value + "D";
         }).then(value =>{
             expect(value).to.equal("TDD");
