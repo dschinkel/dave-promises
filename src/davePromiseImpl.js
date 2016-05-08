@@ -2,7 +2,6 @@
 
 function Impl(callback) {
     var callbackQueue = [],
-        currentPromise = this,
         resolved,
         rejected;
 
