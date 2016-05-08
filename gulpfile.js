@@ -41,14 +41,3 @@ gulp.task('test', function() {
             ui: 'bdd'
         }))
 });
-
-//gulp.task('test', ['build'], function() {
-//    process.env.PORT = 8000;
-//    return gulp.src(['build/*-test.js'], { read: false })
-//        .pipe(mocha({
-//            timeout: 3000,
-//            reporter: config.test.mocha.reporter,
-//            ui: 'bdd'
-//        }))
-//});
-
