@@ -38,7 +38,7 @@ function Impl(callback) {
         }
     }
 };
-// I just implemented this all function to make my test pass...
+
 Impl.all = function(promises){
 
     var values = [];
