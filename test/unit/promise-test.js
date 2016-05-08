@@ -57,4 +57,21 @@ describe('Promise', () => {
             done();
         });
     });
+
+    it('should be able to chain promises', done => {
+        new DavePromise((resolve) =>{
+            resolve('T');
+        }).then(value =>{
+            console.log("value: " + value);
+            return value;
+        }).then(value => {
+            console.log("value: " + value);
+            return value + " D";
+        }).then(value =>{
+            value + " D";
+            expect(value).to.equal("TDD");
+            done();
+        })
+    });
+
 });

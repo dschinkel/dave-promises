@@ -2,6 +2,7 @@
 
 function Impl(callback) {
     var callbackQueue = [],
+        currentPromise = this,
         resolved,
         rejected;
 
@@ -17,7 +18,7 @@ function Impl(callback) {
     var processCAllbackQueue = () => {
         if(resolved != undefined && resolved) {
             for (let callback of callbackQueue) {
-                callback(resolved);
+               callback(resolved);
             };
         };
     };
@@ -30,6 +31,7 @@ function Impl(callback) {
     }
 
     return {
+
         then(handleResolved, handleRejected){
             if (resolved != undefined && handleResolved) {
                 handleResolved(resolved, undefined);
@@ -40,7 +42,11 @@ function Impl(callback) {
             else {
                 callbackQueue.push(handleResolved);
             }
+
+            return currentPromise;
         }
+
+
     }
 };
 

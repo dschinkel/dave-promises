@@ -226,3 +226,5 @@ Promises
     ---
 
         http://stackoverflow.com/questions/9828684/how-to-get-all-arguments-of-a-callback-function
+        http://solutionoptimist.com/2013/12/27/javascript-promise-chains-2/
+        http://www.luiselizondo.net/synchronous-javascript-using-promises-a-tutorial-on-using-promises/
