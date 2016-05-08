@@ -23,7 +23,7 @@ describe('Promise', () => {
     });
 
     it('should handle reject correctly', done => {
-        var error = new Error('something went horribly wrong because Dave M. Wrote this code!');
+        var error = new Error('something went horribly wrong!');
 
         new DavePromise((resolve, reject) => {
             reject(error);
