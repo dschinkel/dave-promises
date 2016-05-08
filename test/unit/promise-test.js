@@ -1,4 +1,4 @@
-import Impl from '../../src/davePromiseImpl'
+import Impl from '../../src/DavePromise'
 import {expect} from 'chai';
 
 const DavePromise = Impl;
