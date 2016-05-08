@@ -22,7 +22,12 @@ function Impl(callback) {
         };
     };
 
-    callback(resolve, reject);
+
+    try {
+        callback(resolve, reject);
+    } catch (err) {
+        rejected = err;
+    }
 
     return {
         then(handleResolved, handleRejected){
@@ -40,7 +45,6 @@ function Impl(callback) {
 };
 
 Impl.all = function(promises){
-
     var values = [];
 
     for (let promise of promises){

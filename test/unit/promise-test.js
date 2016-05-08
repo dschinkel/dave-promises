@@ -44,4 +44,17 @@ describe('Promise', () => {
             done();
         });
     });
+
+    it('should properly handle callbacks that throw errors', done => {
+        var error = new Error('something went horribly wrong!');
+
+        new DavePromise((resolve, reject) => {
+            throw error;
+        }).then(() => {
+            throw new Error('This should not be called');
+        }, err => {
+            expect(err).to.equal(error);
+            done();
+        });
+    });
 });
