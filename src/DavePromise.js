@@ -42,12 +42,12 @@ function Promise(callback) {
                 callbackQueue.push(handleResolved);
             }
 
-            return new Impl(resolve => resolve(newValue));
+            return new Promise(resolve => resolve(newValue));
         }
     }
 };
 
-Impl.all = function(promises) {
+Promise.all = function(promises) {
     var values = [];
 
     for (let promise of promises) {
