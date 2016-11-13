@@ -1,7 +1,7 @@
-import Impl from '../../src/DavePromise'
+import promise from '../../src/promise'
 import {expect} from 'chai';
 
-const DavePromise = Impl;
+const DavePromise = promise;
 
 describe('Promise', () => {
     it('should callback when resolve is invoked', done => {
