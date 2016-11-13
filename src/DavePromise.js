@@ -1,6 +1,6 @@
 
 
-function Impl(callback) {
+function Promise(callback) {
     var callbackQueue = [],
         resolved,
         rejected;
@@ -65,4 +65,4 @@ Impl.all = function(promises) {
     }
 }
 
-export default Impl;
+export default Promise;
